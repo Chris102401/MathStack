@@ -16,6 +16,7 @@ namespace MathAPI.Controllers
     [ApiController]
     public class AuthController : Controller
     {
+        
         private readonly IConfiguration _configuration;
         private readonly FirebaseAuthProvider _auth;
         private readonly byte[] _key;
