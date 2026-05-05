@@ -98,7 +98,7 @@ namespace MathAPI.Controllers
             }
         }
 
-        [HttpGet("DeleteHistory")]
+        [HttpDelete("DeleteHistory")]
         #region
         [ProducesResponseType(typeof(List<MathCalculation>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(Error), StatusCodes.Status400BadRequest)]
