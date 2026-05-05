@@ -28,9 +28,9 @@ namespace MathAPI.Controllers
         {
             var Token = User.FindFirst("UserId")?.Value;
 
-            if (mathCalculation.FirstNumber == null  || mathCalculation.SecondNumber == null || mathCalculation.Operation == 0)
+            if (mathCalculation.FirstNumber == null || mathCalculation.SecondNumber == null || mathCalculation.Operation == 0)
             {
-                return BadRequest (new Error ("Math equation not complete!"));
+                return BadRequest(new Error("Math equation not complete!"));
             }
 
             switch (mathCalculation.Operation)
@@ -62,12 +62,11 @@ namespace MathAPI.Controllers
             {
                 _context.Add(mathCalculation);
                 await _context.SaveChangesAsync();
-                
             }
-                    
-        return Created(mathCalculation.CalculationId.ToString(), mathCalculation);
+
+            return Created(mathCalculation.CalculationId.ToString(), mathCalculation);
         }
-       
+
         [HttpGet("GetHistory")]
         #region
         [ProducesResponseType(typeof(List<MathCalculation>), StatusCodes.Status200OK)]
@@ -81,7 +80,7 @@ namespace MathAPI.Controllers
         {
             var Token = User.FindFirst("UserId")?.Value;
 
-            if(_context.MathCalculations.Count(m => m.FirebaseUuid.Equals(Token)) == 0)
+            if (_context.MathCalculations.Count(m => m.FirebaseUuid.Equals(Token)) == 0)
             {
                 return BadRequest(new Error("User invalid!"));
             }
@@ -91,7 +90,7 @@ namespace MathAPI.Controllers
             if (historyItems.Count > 0)
             {
                 return Ok(historyItems);
-            } 
+            }
             else
             {
                 return NotFound(new Error("No history found!"));
@@ -107,9 +106,8 @@ namespace MathAPI.Controllers
         [Produces("application/json")]
         [Authorize]
         #endregion
-        public async Task<IActionResult> DeleteHistory() 
+        public async Task<IActionResult> DeleteHistory()
         {
-
             var Token = User.FindFirst("UserId")?.Value;
 
             if (_context.MathCalculations.Count(m => m.FirebaseUuid.Equals(Token)) == 0)
@@ -127,7 +125,7 @@ namespace MathAPI.Controllers
             }
             else
             {
-                return NotFound(new Error("No history found!"));
+                return NotFound(new Error("No history to delete!"));
             }
         }
     }

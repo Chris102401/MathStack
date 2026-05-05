@@ -17,16 +17,16 @@ public partial class MathCalculation
 
     public string? FirebaseUuid { get; set; }
 
-    private MathCalculation()
-    {
-        
-    }
-
     public static MathCalculation Create(decimal? firstNumber, decimal? secondNumber, int? operation, decimal? result, string? firebaseUuid)
     {
         if (operation == 4 && secondNumber == 0)
         {
             throw new ArgumentException("Cannot divide by zero.");
+        }
+
+        if (firstNumber == null || secondNumber == null || operation == 0 || firebaseUuid == null)
+        {
+            throw new ArgumentException("Missing values!");
         }
 
         return new MathCalculation
